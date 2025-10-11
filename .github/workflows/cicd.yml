@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+      env:
+        AWS_REGION: us-east-1
+        ECR_REGISTRY: 267613167594.dkr.ecr.us-east-1.amazonaws.com
+        ECR_REPOSITORY: ecrh
+        IMAGE_TAG: v1
 
 jobs:
   build-push:
