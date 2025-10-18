@@ -23,7 +23,10 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v2
 
-    - name: Build, Tag, and Push Docker Image
+    - name: Build and push Docker image to ECR
+     env:
+     AWS_REGION: us-east-1
+     AWS_ACCOUNT_ID: 267613167594
       run: |
        
         IMAGE_URI=${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/mediplus:$GITHUB_RUN_NUMBER
