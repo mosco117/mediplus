@@ -24,14 +24,18 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v2
 
     - name: Build and push Docker image to ECR
-     env:
-     AWS_REGION: us-east-1
-     AWS_ACCOUNT_ID: 267613167594
+      env:
+        AWS_REGION: us-east-1
+        AWS_ACCOUNT_ID: 267613167594
       run: |
-       
-        IMAGE_URI=${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/mediplus:$GITHUB_RUN_NUMBER
+        IMAGE_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/mediplus:${GITHUB_RUN_NUMBER}
+        
+        echo "Building image: $IMAGE_URI"
         docker build -t $IMAGE_URI .
+        
+        echo "Pushing image to ECR..."
         docker push $IMAGE_URI
+
 
   #  - name: Deploy to EC2 via SSH
    #   uses: appleboy/ssh-action@v1.0.3
