@@ -25,7 +25,7 @@ jobs:
 
     - name: Build, Tag, and Push Docker Image
       run: |
-        IMAGE_URI=${{ secrets.ECR_REPOSITORY }}/mediplus:GITHUB_RUN_NUMBER
+        IMAGE_URI=${{ secrets.ECR_REPOSITORY }}/mediplus:$GITHUB_RUN_NUMBER
         docker build -t $IMAGE_URI .
         docker push $IMAGE_URI
 
